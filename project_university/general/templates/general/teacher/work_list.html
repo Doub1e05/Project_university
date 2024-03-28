@@ -1,0 +1,33 @@
+{% extends 'general/teacher.html' %}
+
+{% block title %}{% block page %}Список работ{% endblock %}{% endblock %}
+
+{% block content  %}
+    <div class="table_ block" style="padding-bottom: 19px">
+        <div style="padding-left: 10px; padding-top: 5px">
+            <div style="display: inline-table;">
+                <p style="margin-bottom: 0; ">Курс</p>
+                <select name="select1" style="width: 90%; margin-right: 79px;">
+                  <option value="value1" selected>ИВТб-1304-05-00</option>
+                  <option value="value2">ИВТб-1305-05-00</option>
+                </select>
+                <p>
+            </div>
+            <div style="display: inline-table;">
+                <p style="margin-bottom: 0">Предмет</p>
+                <select name="select2" style="width: 205px">
+                  <option value="value1" selected>Дискретная математика</option>
+                  <option value="value2">Информатика</option>
+                </select>
+            </div>
+        </div>
+        <div style="padding-left: 200px; margin-bottom: 0">
+            <p>Таблица...</p>
+        </div>
+        <p style="margin: 0; padding-left: 30px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br>
+            Natus tempora, voluptate. Asperiores atque corporis, cum<br>
+            cumque dicta distinctio doloribus eum, fugit laboriosam <br>
+            molestias nisi, quasi rerum saepe totam ullam unde!</p>
+    </div>
+{{ block.super }}
+{% endblock %}
