@@ -3,7 +3,7 @@ import easyocr
 
 
 def text_recognition(file_path):
-    reader = easyocr.Reader(["ru"])
+    reader = easyocr.Reader(["en"])
     result = reader.readtext(file_path, detail=False)
     digit_result = [i for i in result if i.isdigit()]
     return digit_result
@@ -22,7 +22,7 @@ def main():
         cv2.imshow("Camera Feed", frame)
 
         key = cv2.waitKey(1)
-        if key == ord('q'):  # Нажмите 'q', чтобы выйти из программы
+        if key == ord('q') or key == ord('w') or key == ord('й') or key == ord('с'):  # Нажмите 'q', чтобы выйти из программы
             break
         elif key == ord('c'):  # Нажмите 'c', чтобы сделать снимок
             cv2.imwrite('captured_image.jpg', frame)
