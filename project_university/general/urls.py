@@ -3,6 +3,8 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+
 urlpatterns = [
     re_path(r'^work-check/$', views.Teacher.work_check, name="teacher-work-check"),
     re_path(r'^work-list/$', views.Teacher.work_list, name="teacher-work-list"),
@@ -13,4 +15,6 @@ urlpatterns = [
     re_path(r'^progress/$', views.Students.progress, name="students-progress"),
     re_path(r'^about-student/$', views.Students.about, name="students-about"),
 
+    path('api/labs', views.lab_list),
+    path('api/labs/<int:pk>/', views.lab_detail),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
