@@ -5,6 +5,17 @@ from django.db import models
 from django.conf import settings
 
 
+
+class generalForTeacher(models.Model):
+    idOfTeacher = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
+    nameOfTeacher = models.CharField(max_length=255)
+    nameOfDiscipline = models.CharField(max_length=255)
+    statusOfLab = models.BooleanField(default=False)
+
+class Lab(models.Model):
+     lab_id =  models.IntegerField()
+     is_completed = models.BooleanField(default=False)
+
 class UserManager(BaseUserManager):
 
     def create_user(self, login, last_name, first_name, surname, role, password=None):
