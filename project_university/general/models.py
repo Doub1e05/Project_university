@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
-
 
 class UserManager(BaseUserManager):
 
@@ -85,6 +85,7 @@ class User(AbstractBaseUser):
         on_delete=models.PROTECT,
         verbose_name='Поток',
         null=True,
+        blank=True,
     )
 
     telegram = models.CharField(
@@ -105,7 +106,7 @@ class User(AbstractBaseUser):
     REQUIRED_FIELDS = ["last_name", "first_name", "surname", "role"]
 
     def __str__(self):
-        return self.login
+        return f'{self.last_name} {self.first_name} {self.surname}'
 
     def has_perm(self, perm, obj=None):
         "Есть ли у пользователя определенное разрешение?"
@@ -116,6 +117,12 @@ class User(AbstractBaseUser):
         "Есть ли у пользователя разрешения на просмотр приложения app_label?"
 
         return True
+
+    def clean(self):
+        if self.role == 'Student' and not self.thread:
+            raise ValidationError({'thread': 'Поток обязательное поле для студента'})
+        elif self.role == 'Teacher' and self.thread:
+            raise ValidationError({'thread': 'Поток не должен быть указан для преподавателя'})
 
     @property
     def is_staff(self):
@@ -159,15 +166,88 @@ class Thread(models.Model):
 
 class Status(models.Model):
     """
-    Макетная модель статусов работ (будет заменена)
+    Модель для статусов работ
     """
-    work_name = models.CharField(verbose_name='Название работы', blank=True, default='', max_length=255)
-    student_id = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Студент')
-    status = models.CharField(choices=(('Accepted', 'Принято'), ('Rejected', 'Отправлено на доработку')), default='', blank=True, max_length=255, verbose_name='Статус')
+    work = models.ForeignKey(
+        to='Works', 
+        on_delete=models.CASCADE, 
+        verbose_name='Работа',
+        )
+
+    student = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        verbose_name='Студент'
+        )
+
+    status = models.CharField(
+        choices=(('Accepted', 'Принято'), 
+                 ('Rejected', 'Отправлено на доработку')), 
+        default='', 
+        blank=True, 
+        max_length=255, 
+        verbose_name='Статус'
+        )
+
+    identifier = models.IntegerField( 
+        verbose_name='Идентификатор',
+        null=True,
+        unique=True,
+    )
 
     def __str__(self) -> str:
-        return f'{self.work_name} {self.student_id} {self.status}'
+        return f'{self.work} {self.student} {self.status}'
     
     class Meta:
         verbose_name = 'Статус'
         verbose_name_plural = 'Статусы'
+
+class Subjects(models.Model):
+    
+    subject_name = models.CharField(
+        default='',
+        max_length=255,
+        blank=False,
+        verbose_name='Название предмета'
+    )
+
+    def __str__(self) -> str:
+        return self.subject_name
+    
+    class Meta:
+        verbose_name = 'Предмет'
+        verbose_name_plural = 'Предметы'
+
+class Works(models.Model):
+    """
+    Модель лабораторных работ
+    """
+
+    work_name = models.CharField(
+        default='',
+        max_length=255,
+        blank=False,
+        verbose_name='Название работы'
+    )
+
+    thread = models.ForeignKey(
+        to='Thread',
+        on_delete=models.CASCADE,
+        verbose_name='Поток',
+        null=True,
+    )
+
+    subject = models.ForeignKey(
+        to='Subjects',
+        on_delete=models.CASCADE,
+        verbose_name='Предмет',
+        null=True,
+    )
+
+    def __str__(self) -> str:
+        return self.work_name
+    
+    class Meta:
+        verbose_name = 'Работу'
+        verbose_name_plural = 'Работы'
+
