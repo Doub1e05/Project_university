@@ -7,15 +7,20 @@ from django.core.exceptions import ValidationError
 from django.contrib.admin import ModelAdmin
 
 # Пользовательские модели
-from .models import Status, User, Thread
+from .models import Status, User, Thread, Works, Subjects
 
-# ------------ Для макета (Будет замена) -------------
 class StatusAdmin(ModelAdmin):
-    list_display = ['work_name', 'student_id', 'status']
+    list_display = ['work', 'student', 'status', 'identifier']
     list_editable = ['status']
+    
+    def has_add_permission(self, request):
+        return False
 
-admin.site.register(Status, StatusAdmin)
-# ----------------------------------------------------
+class WorksAdmin(ModelAdmin):
+    list_display = ['work_name', 'thread', 'subject']
+
+class SubjectsAdmin(ModelAdmin):
+    list_display = ['subject_name']
 
 class UserCreationForm(forms.ModelForm):
     """
@@ -77,9 +82,9 @@ class UserAdmin(BaseUserAdmin):
 
     # Поля, которые будут использоваться при отображении модели пользователя.
     # Они переопределяют определения в базовом UserAdmin, которые ссылаются на определенные поля в auth.User.
-    list_display = ["login", "last_name", "first_name", "surname", "role", "telegram"]
+    list_display = ["login", "last_name", "first_name", "surname", "role", "telegram", "thread"]
     list_filter = ["is_admin"]
-    list_editable = ["telegram"]
+    list_editable = ["telegram", "thread"]
 
     fieldsets = [
         ("Учётная запись", {"fields": ["login", "password"]}),
@@ -112,6 +117,9 @@ class UserAdmin(BaseUserAdmin):
 # Регистрация нового UserAdmin
 admin.site.register(User, UserAdmin)
 admin.site.register(Thread)
+admin.site.register(Status, StatusAdmin)
+admin.site.register(Subjects, SubjectsAdmin)
+admin.site.register(Works, WorksAdmin)
 
 # Поскольку мы не используем встроенные разрешения Django, отменяем регистрацию модели группы от администратора.
 admin.site.unregister(Group)
