@@ -4,8 +4,18 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
+from django.contrib.admin import ModelAdmin
 
-from .models import User, Thread
+# Пользовательские модели
+from .models import Status, User, Thread
+
+# ------------ Для макета (Будет замена) -------------
+class StatusAdmin(ModelAdmin):
+    list_display = ['work_name', 'student_id', 'status']
+    list_editable = ['status']
+
+admin.site.register(Status, StatusAdmin)
+# ----------------------------------------------------
 
 class UserCreationForm(forms.ModelForm):
     """
@@ -56,7 +66,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ["login", "password", "last_name", "first_name", "surname", "role", "thread", "is_admin"]
+        fields = ["login", "password", "last_name", "first_name", "surname", "role", "thread", "telegram", "is_admin"]
 
 
 class UserAdmin(BaseUserAdmin):
@@ -67,13 +77,14 @@ class UserAdmin(BaseUserAdmin):
 
     # Поля, которые будут использоваться при отображении модели пользователя.
     # Они переопределяют определения в базовом UserAdmin, которые ссылаются на определенные поля в auth.User.
-    list_display = ["login", "last_name", "first_name", "surname", "role", "is_admin"]
+    list_display = ["login", "last_name", "first_name", "surname", "role", "telegram"]
     list_filter = ["is_admin"]
+    list_editable = ["telegram"]
 
     fieldsets = [
         ("Учётная запись", {"fields": ["login", "password"]}),
-        ("Личная информация", {"fields": ["last_name", "first_name", "surname", "role", "thread"]}),
-        ("Прочее", {"fields": ["is_admin", "last_login"]}),
+        ("Персональная информация", {"fields": ["last_name", "first_name", "surname", "role", "thread"]}),
+        ("Прочее", {"fields": ["telegram", "is_admin", "last_login"]}),
     ]
 
     def clean(self):
@@ -93,7 +104,7 @@ class UserAdmin(BaseUserAdmin):
     ]
     
     readonly_fields = ["last_login"]
-    search_fields = ["login", "last_name", "first_name", "surname"]
+    search_fields = ["login", "last_name", "first_name", "surname", "telegram"]
     ordering = ["login"]
     filter_horizontal = []
 
