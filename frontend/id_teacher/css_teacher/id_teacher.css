@@ -1,0 +1,60 @@
+body{
+padding: 10px;
+}
+main{
+/* Окно с функционалом */
+box-sizing: border-box;
+position: relative;
+width: 1108px;
+height: 706px;
+border: 1px solid rgba(0, 0, 0, 0.3);
+border-radius: 25px;
+}
+.accordion{
+min-width: 430px;
+}
+.accordion-collapse{
+max-width: 428px;
+max-height: 309px;
+}
+.small_icons{
+position: relative;
+width: 30;
+height: 30;
+margin-right: 10px;
+}
+.id_input{
+/* Rectangle 8 */
+width: 430px;
+height: 72px;
+left: 4px;
+top: 41px;
+text-align: center;
+border-radius: 20px;
+font-size: larger;
+border: 2px solid grey;
+}
+
+.search_btn{
+margin-left: 8px;
+position: relative;
+background: #4077A8;
+border-radius: 25px;
+width: 414px;
+height: 52px;
+color: #FFFFFF;
+cursor: pointer;
+border: none;
+}
+.search{
+position:absolute;
+left: 35px;
+top: 35px;
+cursor:text;
+}
+.qr{
+position: absolute;
+left: 400px;
+top: 35px;
+cursor: text;
+}
