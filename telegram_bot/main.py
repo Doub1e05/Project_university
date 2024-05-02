@@ -1,4 +1,4 @@
-from .app import dp, bot
+from Bot.app import dp, bot
 import asyncio
 
 
