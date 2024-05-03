@@ -36,7 +36,7 @@ async def logining(message: Message, state: FSMContext):
 
     with sqlite3.connect(DB_DIRECTORY, timeout=TIMEOUT_DELAY) as connect:
         cursor = connect.cursor()
-        cursor.execute("SELECT COUNT(*) FROM auth_user WHERE username = ?", (message.text,))
+        cursor.execute("SELECT COUNT(*) FROM general_user WHERE login = ?", (message.text,))
         check_login = cursor.fetchone()[0]
 
     # Если такого логина нет - ошибка
@@ -45,6 +45,11 @@ async def logining(message: Message, state: FSMContext):
         await state.set_state(Auth.user_found)
     
     else:
+        
+        with sqlite3.connect(DB_DIRECTORY, timeout=TIMEOUT_DELAY) as connect:
+            cursor = connect.cursor()
+            cursor.execute("UPDATE general_user SET telegram = ? WHERE login = ?", ("Yes", message.text))
+            connect.commit()
             
         await message.answer(msg.LOGINING_SUCCESSFULY)
 
@@ -60,7 +65,7 @@ async def logining(message: Message, state: FSMContext):
                     for object in response:
                         with sqlite3.connect(DB_DIRECTORY, timeout=TIMEOUT_DELAY) as connect:
                             cursor = connect.cursor()
-                            cursor.execute("SELECT id FROM auth_user WHERE username = ?", (message.text, ))
+                            cursor.execute("SELECT id FROM general_user WHERE login = ?", (message.text, ))
 
                             if object['student_id'] == cursor.fetchone()[0]:
 
