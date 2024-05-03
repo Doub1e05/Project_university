@@ -1,6 +1,6 @@
-from django.db.models.signals import post_save, post_delete, pre_save
+from django.db.models.signals import post_save, post_delete, pre_save, post_migrate
 from django.dispatch import receiver
-from .models import Works, Status, User
+from .models import Works, Status, User, Thread
 import random
 from django.db import IntegrityError
 
