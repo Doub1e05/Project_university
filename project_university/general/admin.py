@@ -51,7 +51,6 @@ class UserCreationForm(forms.ModelForm):
         return password2
 
     def save(self, commit=True):
-        # Сохранение пароля без хэширования
 
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
@@ -67,7 +66,7 @@ class UserChangeForm(forms.ModelForm):
     Форма для редактирования пользователей
     """
 
-    password = ReadOnlyPasswordHashField()
+    password = ReadOnlyPasswordHashField(label=("Пароль"))
 
     class Meta:
         model = User
@@ -103,13 +102,13 @@ class UserAdmin(BaseUserAdmin):
             None,
             {
                 "classes": ["wide"],
-                "fields": ["login", "password1", "password2"],
+                "fields": ["login", "last_name", "first_name", "surname", "role", "password1", "password2"],
             },
         ),
     ]
     
     readonly_fields = ["last_login"]
-    search_fields = ["login", "last_name", "first_name", "surname", "telegram"]
+    search_fields = ["login", "last_name", "first_name", "surname", "thread", "telegram"]
     ordering = ["login"]
     filter_horizontal = []
 
