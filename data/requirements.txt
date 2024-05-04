@@ -1,3 +1,6 @@
 Django==5.0.3
 djangorestframework
 aiogram
+django-cors-headers
+gunicorn
+requests

@@ -1,7 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.core.validators import RegexValidator
-from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
 
@@ -9,13 +8,13 @@ class UserManager(BaseUserManager):
 
     def create_user(self, login, last_name, first_name, surname, role, password=None):
         """
-        Создание обычного польователя. Данные - логин и пароль
+        Создание обычного польователя
         """
         if not login:
             raise ValueError("Пользователь должен иметь логин")
 
         user = self.model(
-            login=login,
+            login = login,
             last_name = last_name,
             first_name = first_name,
             surname = surname,
@@ -28,15 +27,15 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, login, last_name, first_name, surname, role, password=None):
         """
-        Создание администратора. Данные - логин и пароль
+        Создание администратора
         """
         user = self.create_user(
             login,
-            password=password,
             last_name = last_name,
             first_name = first_name,
             surname = surname,
             role = role,
+            password = password,
         )
 
         user.is_admin = True
@@ -44,7 +43,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
 
     login = models.CharField(
         verbose_name='Логин',
@@ -118,11 +117,12 @@ class User(AbstractBaseUser):
 
         return True
 
-    def clean(self):
-        if self.role == 'Student' and not self.thread:
-            raise ValidationError({'thread': 'Поток обязательное поле для студента'})
-        elif self.role == 'Teacher' and self.thread:
-            raise ValidationError({'thread': 'Поток не должен быть указан для преподавателя'})
+    # Для использования требуется продумать логику создания пользователей
+    # def clean(self):
+    #     if self.role == 'Student' and not self.thread:
+    #         raise ValidationError({'thread': 'Поток обязательное поле для студента'})
+    #     elif self.role == 'Teacher' and self.thread:
+    #         raise ValidationError({'thread': 'Поток не должен быть указан для преподавателя'})
 
     @property
     def is_staff(self):
@@ -250,4 +250,3 @@ class Works(models.Model):
     class Meta:
         verbose_name = 'Работу'
         verbose_name_plural = 'Работы'
-
