@@ -132,6 +132,18 @@ class WorksAPIViewAction(APIView):
         serializer = WorksSerializer(data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def delete(self, request, id):
+        try:
+            data = Works.objects.get(id=id)
+
+        except Works.DoesNotExist:
+            message = {"message: works not found"}
+            return  Response(message, status=status.HTTP_404_NOT_FOUND)
+
+        data.delete()
+        return Response({"message": "Status deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+
 class SubjectsView(ListCreateAPIView):
     """
     Полный список предметов
@@ -161,6 +173,7 @@ class SubjectsAPIViewAction(APIView):
 
         serializer = SubjectsSerializer(data)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class StatusAPIView(ListCreateAPIView):
     """
