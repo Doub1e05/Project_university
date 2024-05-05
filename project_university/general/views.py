@@ -116,7 +116,7 @@ class WorksView(ListCreateAPIView):
 class WorksAPIViewAction(APIView):
     """
     Определённая лабораторная работа
-    """  
+    """ 
 
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
@@ -180,13 +180,19 @@ class StatusAPIView(ListCreateAPIView):
     Полный список статусов лабораторных работ у каждого студента
     """
 
+    permission_classes = ()
+    authentication_classes = ()
+
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
 
 class StatusAPIViewAction(APIView):
     """
     Список работы определённого студента
-    """  
+    """ 
+
+    permission_classes = ()
+    authentication_classes = ()
 
     def get(self, request, id):
         try:
