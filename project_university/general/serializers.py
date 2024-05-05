@@ -4,12 +4,6 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 
-class StatusSerializer(ModelSerializer):
-    
-    class Meta:
-        model = Status
-        fields = "__all__"
-
 class UserLoginSerializer(serializers.Serializer):
     login = serializers.CharField()
     password = serializers.CharField()
@@ -44,4 +38,11 @@ class SubjectsSerializer(ModelSerializer):
 
     class Meta:
         model = Subjects
+        fields = "__all__"
+
+class StatusSerializer(ModelSerializer):
+    work = WorksSerializer()
+
+    class Meta:
+        model = Status
         fields = "__all__"
