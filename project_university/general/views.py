@@ -137,11 +137,11 @@ class WorksAPIViewAction(APIView):
             data = Works.objects.get(id=id)
 
         except Works.DoesNotExist:
-            message = {"message: works not found"}
+            message = {"message: Work not found"}
             return  Response(message, status=status.HTTP_404_NOT_FOUND)
 
         data.delete()
-        return Response({"message": "Status deleted"}, status=status.HTTP_204_NO_CONTENT)
+        return Response({"message": "Work deleted"}, status=status.HTTP_204_NO_CONTENT)
 
 
 class SubjectsView(ListCreateAPIView):
