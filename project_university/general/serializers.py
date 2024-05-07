@@ -4,12 +4,6 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 
-class StatusSerializer(ModelSerializer):
-    
-    class Meta:
-        model = Status
-        fields = "__all__"
-
 class UserLoginSerializer(serializers.Serializer):
     login = serializers.CharField()
     password = serializers.CharField()
@@ -18,7 +12,7 @@ class UserLoginSerializer(serializers.Serializer):
         user = authenticate(login=clean_data['login'], password=clean_data['password'])
 
         if not user:
-            raise ValidationError('user not found')
+            raise ValidationError('User Not Found')
         
         return user
 
@@ -44,4 +38,12 @@ class SubjectsSerializer(ModelSerializer):
 
     class Meta:
         model = Subjects
+        fields = "__all__"
+
+class StatusSerializer(ModelSerializer):
+    work = WorksSerializer()
+    student = UserSerializer()
+
+    class Meta:
+        model = Status
         fields = "__all__"
