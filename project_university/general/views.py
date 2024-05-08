@@ -116,7 +116,7 @@ class WorksView(ListCreateAPIView):
 class WorksAPIViewAction(APIView):
     """
     Определённая лабораторная работа
-    """  
+    """ 
 
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
@@ -131,6 +131,18 @@ class WorksAPIViewAction(APIView):
 
         serializer = WorksSerializer(data)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request, id):
+        try:
+            data = Works.objects.get(id=id)
+
+        except Works.DoesNotExist:
+            message = {"message: Work not found"}
+            return  Response(message, status=status.HTTP_404_NOT_FOUND)
+
+        data.delete()
+        return Response({"message": "Work deleted"}, status=status.HTTP_204_NO_CONTENT)
+
 
 class SubjectsView(ListCreateAPIView):
     """
@@ -162,10 +174,14 @@ class SubjectsAPIViewAction(APIView):
         serializer = SubjectsSerializer(data)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 class StatusAPIView(ListCreateAPIView):
     """
     Полный список статусов лабораторных работ у каждого студента
     """
+    permission_classes = ()
+    authentication_classes = ()
+
     permission_classes = ()
     authentication_classes = ()
 
@@ -175,7 +191,10 @@ class StatusAPIView(ListCreateAPIView):
 class StatusAPIViewAction(APIView):
     """
     Список работы определённого студента
-    """  
+    """ 
+
+    permission_classes = ()
+    authentication_classes = ()
 
     permission_classes = ()
     authentication_classes = ()
