@@ -12,7 +12,7 @@ class UserLoginSerializer(serializers.Serializer):
         user = authenticate(login=clean_data['login'], password=clean_data['password'])
 
         if not user:
-            raise ValidationError('user not found')
+            raise ValidationError('User Not Found')
         
         return user
 
@@ -42,6 +42,7 @@ class SubjectsSerializer(ModelSerializer):
 
 class StatusSerializer(ModelSerializer):
     work = WorksSerializer()
+    student = UserSerializer()
 
     class Meta:
         model = Status
