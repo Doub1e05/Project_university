@@ -15,6 +15,9 @@ class Auth(StatesGroup):
     authorizhation = State()
     work_status_message = State()
 
+
+
+
 @dp.message(CommandStart())
 async def command_start_handler(message: Message, state: FSMContext) -> None:
     """
@@ -28,6 +31,7 @@ async def authorizhation(message: Message, state: FSMContext):
     """
     Авторизация через логин и пароль
     """
+
 
     try:
         data = {"login": f"{message.text.split()[0]}", 
