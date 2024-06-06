@@ -250,3 +250,6 @@ class Works(models.Model):
     class Meta:
         verbose_name = 'Работу'
         verbose_name_plural = 'Работы'
+
+# class Image(models.Model):
+#     image = models.ImageField(upload_to='images/')

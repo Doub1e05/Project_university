@@ -1,0 +1,122 @@
+.tab-wrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.tab-l {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.tab-r {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.select-btn {
+    width: 80%;
+    height: 34px;
+    margin: 20px 10% 10px 10%;
+    border-radius: 25px;
+    border: 0px;
+    background: #4077a8;
+    font: 600 calc(10px + 0.5vw) var(--font-family);
+    color: #fff;
+}
+
+.tg-status {
+    margin-left: 15%;
+    font: 400 calc(10px + 0.5vw) var(--font-family);
+    color: #000;
+}
+
+.choice-title {
+    font: 300 calc(12px + 0.5vw) var(--font-family);
+    color: #000;
+    position: relative;
+    height: 40px;
+    width: 90%;
+    text-align: left;
+    margin: 10px 5% 0 5%;
+    padding: 8px 0 8px 50px;
+}
+
+.choice-icon {
+    height: 55%;
+    width: auto;
+    position: absolute;
+    top: 16%;
+    opacity: 80%;
+    left: 20px;
+}
+
+.choice-input {
+    width: 80%;
+    margin: 0 10%;
+    height: 50px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    padding: 0 15px;
+    border: 0px;
+    font: 300 calc(12px + 0.5vw) var(--font-family);
+    color: rgba(0, 0, 0, 0.6);
+    appearance: none;
+}
+
+.code {
+    width: 80%;
+    margin: 0 10% 20px 10%;
+    height: 36px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    border: 0px;
+    font: 300 calc(12px + 0.5vw) var(--font-family);
+    color: rgba(0, 0, 0, 0.6);
+    position: relative;
+}
+
+.id-splsh {
+    position: absolute;
+    left: 20px;
+    border-right: solid 1px rgba(0, 0, 0, 0.2);
+    width: 30px;
+    top: 20%;
+    user-select: none;
+}
+
+.id-code {
+    position: absolute;
+    left: 60px;
+    top: 20%;
+}
+
+.icon-copy {
+    height: 55%;
+    width: auto;
+    position: absolute;
+    top: 16%;
+    opacity: 80%;
+    right: 20px;
+}
+
+@media(max-width: 900px) {
+    .tab-wrapper {
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto;
+    }
+    .tab-l {
+        grid-column: 1;
+        grid-row: 2;
+        height: auto;
+    }
+    .tab-r {
+        grid-column: 1;
+        grid-row: 1;
+        height: auto;
+    }
+    .tg-btn {
+        width: 80%;
+        margin: 20px 10%;
+    }
+}

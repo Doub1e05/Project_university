@@ -23,17 +23,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-83rehet^yiqgz3d_2r8&=t=b7si&f6^p!&=g-a6!k!95*+e=y$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 AUTH_USER_MODEL = 'general.User'
-
+    
 ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost',
     'http://127.0.0.1',
     'http://0.0.0.0',
+    'http://localhost:5173',
+    'http://127.0.0.1:5173'
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 

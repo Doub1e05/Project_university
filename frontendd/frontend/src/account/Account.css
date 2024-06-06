@@ -1,0 +1,27 @@
+.acc-wrapper {
+    width: 90%;
+    margin: 0 auto;
+    padding: 5% 0;
+}
+
+.acc-name {
+    font: 600 calc(12px + 0.5vw) var(--second-family);
+    color: #000;
+}
+
+.acc-role {
+    font: 600 calc(10px + 0.5vw) var(--second-family);
+    color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    left: 8%;
+    top: 26%;
+    line-height: 0.5;
+}
+
+.acc-icon {
+    height: 70%;
+    width: auto;
+    position: absolute;
+    right: 10%;
+    top: 13%;
+}

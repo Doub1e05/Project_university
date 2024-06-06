@@ -1,0 +1,69 @@
+.auth {
+    width: 500px;
+    height: 70%;
+    margin: 0 auto;
+    background-color: #fff;
+    border: 0;
+    border-radius: 25px;
+    position: absolute;
+    top: 15%;
+    left: calc(50% - 250px);
+}
+
+.auth-btn {
+    width: 70%;
+    height: 40px;
+    margin: 30px 15% 30px 15%;
+    border-radius: 25px;
+    border: 0px;
+    background: #4077a8;
+    font: 600 calc(12px + 0.5vw) var(--font-family);
+    color: #fff;
+}
+
+.auth-title {
+    width: 100%;
+    text-align: center;
+    font: 600 calc(20px + 00.5vw) var(--second-family);
+    color: #000;
+    margin: 50px 0 55px 0;
+}
+
+.auth-input {
+    width: 70%;
+    margin: 0 15% 20px 15%;
+    height: 36px;
+    background-color: #f0f0f0;
+    border: 0px;
+    position: relative;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font: 300 calc(10px + 0.3vw) var(--font-family);
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.title-input {
+    width: 64%;
+    margin: 0 18% 10px 18%;
+    font: 300 calc(10px + 0.4vw) var(--font-family);
+    color: #000;
+}
+
+.alt-login {
+    position: relative;
+    width: 100%;
+}
+
+.alt-login-title {
+    width: 70%;
+    margin: 0 15%;
+    text-align: center;
+    font: 300 calc(10px + 0.4vw) var(--font-family);
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.logo-icon {
+    height: auto;
+    width: 60px;
+    margin: 10px calc(50% - 30px);
+}

@@ -1,0 +1,56 @@
+/* ModalCamera.css */
+
+.modal-content {
+    z-index: 1050;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff; /* Цвет фона модального окна */
+    border-radius: 15px; /* Скругление углов модального окна */
+    width: 50vw; /* Ширина модального окна */
+  }
+  
+  /* Затемнение заднего фона */
+  .modal-backdrop.show {
+    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }
+  
+  .capture-button button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .capture-button button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  /* ModalCamera.css */
+
+.camera-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.video-stream {
+  width: 100%;
+  height: auto;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.captured-image img {
+  width: 100%;
+  height: auto;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+}

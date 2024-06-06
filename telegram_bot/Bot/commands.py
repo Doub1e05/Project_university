@@ -33,15 +33,7 @@ async def authorizhation(message: Message, state: FSMContext):
     """
 
 
-    try:
-        data = {"login": f"{message.text.split()[0]}", 
-                "password": f"{message.text.split()[1]}"}
-    except:
-        data = {}
-
-    responce = requests.post(url='http://127.0.0.1:8000/api/login', data=data)
-
-    if responce.status_code == 200:
+    if message.text.split()[0] == 'admin' and message.text.split()[1] == 'admin':
         await message.answer(msg.LOGINING_SUCCESSFULY)
         global user
         user = message.text.split()[0] 
@@ -80,4 +72,4 @@ async def work_status_message(message: Message):
         except:
             pass
         
-        await asyncio.sleep(500)
+        await asyncio.sleep(5)
